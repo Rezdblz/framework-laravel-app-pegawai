@@ -21,8 +21,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        $employees = Employee::latest()->paginate(5);
-        return view('employees.create', compact('employees'));
+        return view('employees.create');
     }
 
     /**
