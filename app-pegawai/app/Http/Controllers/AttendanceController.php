@@ -34,7 +34,7 @@ class AttendanceController extends Controller
             'tanggal' => 'required|date',
             'waktu_masuk' => 'nullable|date_format:H:i',
             'waktu_keluar' => 'nullable|date_format:H:i|after_or_equal:waktu_masuk',
-            'status_absensi' => 'required|string|in:Hadir,Izin,Sakit,Cuti,Alfa',
+            'status_absensi' => 'required|string|in:hadir,izin,sakit,cuti,alfa',
         ]);
 
         Attendance::create($data);
@@ -68,7 +68,7 @@ class AttendanceController extends Controller
             'tanggal' => 'required|date',
             'waktu_masuk' => 'nullable|date_format:H:i',
             'waktu_keluar' => 'nullable|date_format:H:i|after_or_equal:waktu_masuk',
-            'status_absensi' => 'required|string|in:Hadir,Izin,Sakit,Cuti,Alfa',
+            'status_absensi' => 'required|string|in:hadir,izin,sakit,cuti,alfa',
         ]);
         $attendance->update($data);
         return redirect()->route('attendances.index')->with('success', 'Absensi berhasil diupdate.');
