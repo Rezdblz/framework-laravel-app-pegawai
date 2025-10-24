@@ -10,6 +10,8 @@ class Employee extends Model
 {
     protected $fillable = [ 
         'nama_lengkap', 
+        'departemen_id',
+        'jabatan_id',
         'email', 
         'nomor_telepon', 
         'tanggal_lahir', 
@@ -19,7 +21,7 @@ class Employee extends Model
     ]; 
     use HasFactory;
     public function department(){
-        return $this->belongsTo(Department::class,'department_id','id');
+        return $this->belongsTo(Department::class,'departemen_id','id');
     }
     public function position(){
         return $this->belongsTo(Position::class,'jabatan_id','id');

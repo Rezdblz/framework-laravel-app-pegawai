@@ -24,7 +24,7 @@
                     <tr>
                         <td>{{ $employee->nama_lengkap }}</td>
                         <td>{{ $employee->position->nama_jabatan}}</td>
-                        <td>{{ $employee->position->nama_departmen}}</td>
+                        <td>{{ $employee->department->nama_departmen ?? '-' }}</td>
                         <td>{{ $employee->email }}</td>
                         <td>{{ $employee->nomor_telepon }}</td>
                         <td>{{ $employee->tanggal_lahir }}</td>

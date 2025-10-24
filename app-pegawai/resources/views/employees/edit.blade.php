@@ -14,9 +14,12 @@
                 <td><label for="jabatan_id">Jabatan:</label></td>
                 <td>
                     <select id="jabatan_id" name="jabatan_id" required>
-                        <option value="" disabled selected>Pilih Jabatan</option>
+                        <option value="" disabled>Pilih Jabatan</option>
                         @foreach($positions as $position)
-                            <option value="{{ $position->id }}">{{ $position->nama_jabatan }}</option>
+                            <option value="{{ $position->id }}"
+                                {{ old('jabatan_id', $employee->jabatan_id) == $position->id ? 'selected' : '' }}>
+                                {{ $position->nama_jabatan }}
+                            </option>
                         @endforeach
                     </select>
                 </td>
@@ -25,9 +28,12 @@
                 <td><label for="departemen_id">Departemen:</label></td>
                 <td>
                     <select id="departemen_id" name="departemen_id" required>
-                        <option value="" disabled selected>Pilih Departemen</option>
+                        <option value="" disabled>Pilih Departemen</option>
                         @foreach($departments as $department)
-                            <option value="{{ $department->id }}">{{ $department->nama_departmen }}</option>
+                            <option value="{{ $department->id }}"
+                                {{ old('departemen_id', $employee->departemen_id) == $department->id ? 'selected' : '' }}>
+                                {{ $department->nama_departmen }}
+                            </option>
                         @endforeach
                     </select>
                 </td>

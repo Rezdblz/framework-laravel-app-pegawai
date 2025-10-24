@@ -23,9 +23,9 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        $positions = Position::orderBy('nama_jabatan')->get();
         $departments = Department::orderBy('nama_departmen')->get();
-        return view('employees.create', compact('positions', 'departments'));
+        $positions = Position::orderBy('nama_jabatan')->get();
+        return view('employees.create', compact('departments', 'positions'));
     }
 
     /**
@@ -54,7 +54,7 @@ class EmployeeController extends Controller
      */
     public function show(string $id)
     {
-        $employee = Employee::findOrFail($id);
+        $employee = Employee::with('department', 'position')->findOrFail($id);
         return view('employees.show', compact('employee'));
     }
 
@@ -74,7 +74,7 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
+        $data=$request->validate([
             'nama_lengkap' => 'required|string|max:255',
             'departemen_id' => 'required|integer|exists:departments,id',
             'jabatan_id' => 'required|integer|exists:positions,id',
@@ -87,17 +87,7 @@ class EmployeeController extends Controller
 
         ]);
         $employee = Employee::findOrFail($id);
-        $employee->update($request->only([
-            'nama_lengkap',
-            'email',
-            'nomor_telepon',
-            'tanggal_lahir',
-            'alamat',
-            'tanggal_masuk',
-            'status',
-            'departemen_id',
-            'jabatan_id',
-        ]));
+        $employee->update($data);
         return redirect()->route('employees.index')->with('success', 'Pegawai berhasil diupdate.');
     }
 
