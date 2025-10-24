@@ -7,7 +7,7 @@
         @method('PUT')
         <table>
             <tr>
-                <td><label for="karyawan_id">ID Karyawan</label></td>
+                <td><label for="karyawan_id">ID Karyawan:</label></td>
                 <td><input type="number" id="karyawan_id" name="karyawan_id" required></td>
             </tr>
             <tr>

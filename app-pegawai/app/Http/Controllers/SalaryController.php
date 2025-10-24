@@ -22,7 +22,8 @@ class SalaryController extends Controller
      */
     public function create()
     {
-        return view('salaries.create');
+        $employees = Employee::orderBy('nama_lengkap')->get();
+        return view('salaries.create', compact('employees'));
     }
 
     /**
@@ -31,7 +32,7 @@ class SalaryController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'karyawan_id' => 'required|exists:employees,id',
+            'karyawan_id' => 'required|integer|exists:employees,id',
             'bulan' => 'required|string',
             'gaji_pokok' => 'required|integer|min:0',
             'tunjangan' => 'nullable|integer|min:0',
@@ -43,7 +44,7 @@ class SalaryController extends Controller
         $data['total_gaji'] = $data['gaji_pokok'] + $data['tunjangan'] - $data['potongan'];
 
         Salary::create($data);
-        return redirect()->route('salaries.index');
+        return redirect()->route('salaries.index')->with('success', 'Gaji berhasil disimpan.');
     }
 
     /**
@@ -51,8 +52,7 @@ class SalaryController extends Controller
      */
     public function show(Salary $salary)
     {
-        $employees = Employee::orderBy('nama_lengkap')->get();
-        return view('salaries.create', compact('employees'));
+        return view('salaries.show', compact('salary'));
     }
 
     /**

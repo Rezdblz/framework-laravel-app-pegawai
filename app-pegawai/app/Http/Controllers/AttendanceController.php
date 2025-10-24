@@ -12,7 +12,8 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        //
+        $attendances = Attendance::latest()->paginate(5);
+        return view('attendances.index', compact('attendances'));
     }
 
     /**
@@ -20,7 +21,7 @@ class AttendanceController extends Controller
      */
     public function create()
     {
-        //
+        return view('attendances.create');
     }
 
     /**
@@ -28,7 +29,16 @@ class AttendanceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'karyawan_id' => 'required|integer|exists:employees,id',
+            'tanggal' => 'required|date',
+            'waktu_masuk' => 'nullable|date_format:H:i',
+            'waktu_keluar' => 'nullable|date_format:H:i|after_or_equal:waktu_masuk',
+            'status_absensi' => 'required|string|in:Hadir,Izin,Sakit,Cuti,Alfa',
+        ]);
+
+        Attendance::create($data);
+        return redirect()->route('attendances.index')->with('success', 'Absensi berhasil ditambahkan.');
     }
 
     /**
@@ -36,7 +46,8 @@ class AttendanceController extends Controller
      */
     public function show(Attendance $attendance)
     {
-        //
+        $attendance->load('employee');
+        return view('attendances.show', compact('attendance'));
     }
 
     /**
@@ -44,7 +55,7 @@ class AttendanceController extends Controller
      */
     public function edit(Attendance $attendance)
     {
-        //
+        return view('attendances.edit', compact('attendance'));
     }
 
     /**
@@ -52,7 +63,15 @@ class AttendanceController extends Controller
      */
     public function update(Request $request, Attendance $attendance)
     {
-        //
+        $data = $request->validate([
+            'karyawan_id' => 'required|integer|exists:employees,id',
+            'tanggal' => 'required|date',
+            'waktu_masuk' => 'nullable|date_format:H:i',
+            'waktu_keluar' => 'nullable|date_format:H:i|after_or_equal:waktu_masuk',
+            'status_absensi' => 'required|string|in:Hadir,Izin,Sakit,Cuti,Alfa',
+        ]);
+        $attendance->update($data);
+        return redirect()->route('attendances.index')->with('success', 'Absensi berhasil diupdate.');
     }
 
     /**
@@ -60,6 +79,7 @@ class AttendanceController extends Controller
      */
     public function destroy(Attendance $attendance)
     {
-        //
+        $attendance->delete();
+        return redirect()->route('attendances.index')->with('success', 'Absensi berhasil dihapus.');
     }
 }

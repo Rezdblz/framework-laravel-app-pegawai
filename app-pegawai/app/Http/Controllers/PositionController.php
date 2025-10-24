@@ -21,7 +21,7 @@ class PositionController extends Controller
      */
     public function create()
     {
-        return view('positions.create',compact('positions'));        
+        return view('positions.create');
     }
 
     /**
@@ -34,7 +34,7 @@ class PositionController extends Controller
             'gaji_pokok'   => 'required|numeric|min:0',
         ]);
         Position::create($data);
-        return redirect()-> route('position.index');
+        return redirect()->route('positions.index');
     }
 
     /**
@@ -52,7 +52,7 @@ class PositionController extends Controller
     public function edit(string $id)
     {
         $position = Position::findOrFail($id);
-        return view('position.edit', compact('position'));
+        return view('positions.edit', compact('position'));
     }
 
     /**
@@ -65,11 +65,8 @@ class PositionController extends Controller
             'nama_jabatan' => 'required|string|max:255',
             'gaji_pokok'   => 'required|numeric|min:0',
         ]);
-        $position->update($request->only([
-            'nama_jabatan' => 'required|string|max:255',
-            'gaji_pokok'   => 'required|numeric|min:0',
-        ]));
-        return redirect()->route('position.index');
+        $position->update($data);
+        return redirect()->route('positions.index');
     }
 
     /**

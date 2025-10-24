@@ -54,7 +54,7 @@ class EmployeeController extends Controller
      */
     public function show(string $id)
     {
-        $employee = Employee::find($id);
+        $employee = Employee::findOrFail($id);
         return view('employees.show', compact('employee'));
     }
 
@@ -77,7 +77,7 @@ class EmployeeController extends Controller
         $request->validate([
             'nama_lengkap' => 'required|string|max:255',
             'departemen_id' => 'required|integer|exists:departments,id',
-            'jabatan_id' => 'required|integer|exists:departments,id',
+            'jabatan_id' => 'required|integer|exists:positions,id',
             'email' => 'required|email|max:255',
             'nomor_telepon' => 'required|string|max:20',
             'tanggal_lahir' => 'required|date',
@@ -98,7 +98,7 @@ class EmployeeController extends Controller
             'departemen_id',
             'jabatan_id',
         ]));
-        return redirect()->route('employees.index');
+        return redirect()->route('employees.index')->with('success', 'Pegawai berhasil diupdate.');
     }
 
     /**
@@ -106,7 +106,7 @@ class EmployeeController extends Controller
      */
     public function destroy(string $id)
     {
-        $employee = Employee::find($id);
+        $employee = Employee::findOrFail($id);
         $employee->delete();
         return redirect()->route('employees.index');
     }
