@@ -12,7 +12,8 @@
         <nav>
             <ul>
                 <li><a href="{{ url('/employees') }}">Employee</a></li>
-                <li><a href="{{ url('/department') }}">Department</a></li>
+                <li><a href="{{ url('/positions') }}">Position</a></li>
+                <li><a href="{{ url('/departments') }}">Department</a></li>
                 <li><a href="{{ url('/attendance') }}">Attendance</a></li>
                 <li><a href="{{ url('/salaries') }}">Salary</a></li>
             </ul>
