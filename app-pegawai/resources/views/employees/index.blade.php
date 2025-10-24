@@ -3,10 +3,13 @@
 @section('content')
     <div class="container mt-5">
         <h1 class="mb-4">Daftar Pegawai</h1>
+        <a href="{{ route('employees.create') }}" class="btn btn-primary mb-3">Tambah Pegawai</a>
         <table border="1" cellpadding="5" cellspacing="0">
             <thead>
                 <tr>
                     <th>Nama Lengkap</th>
+                    <th>jabatan</th>
+                    <th>departemen</th>
                     <th>Email</th>
                     <th>Nomor Telepon</th>
                     <th>Tanggal Lahir</th>
@@ -20,6 +23,8 @@
                 @foreach($employees as $employee)
                     <tr>
                         <td>{{ $employee->nama_lengkap }}</td>
+                        <td>{{ $employee->position->nama_jabatan}}</td>
+                        <td>{{ $employee->position->nama_departmen}}</td>
                         <td>{{ $employee->email }}</td>
                         <td>{{ $employee->nomor_telepon }}</td>
                         <td>{{ $employee->tanggal_lahir }}</td>

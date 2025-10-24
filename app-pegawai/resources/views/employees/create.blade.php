@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html>
+@extends('master')
+@section('title', 'Form Input Pegawai')
+@section('content')
 
-<head>
-    <title>Form Input Pegawai</title>
-</head>
-
-<body>
     <h1 class="mb-4">Form Pegawai</h1>
     <form action="{{ route('employees.store') }}" method="POST">
         @csrf
@@ -13,6 +9,28 @@
             <tr>
                 <td><label for="nama_lengkap">Nama Lengkap:</label></td>
                 <td><input type="text" id="nama_lengkap" name="nama_lengkap"></td>
+            </tr>
+            <tr>
+                <td><label for="jabatan_id">Jabatan:</label></td>
+                <td>
+                    <select id="jabatan_id" name="jabatan_id" required>
+                        <option value="" disabled selected>Pilih Jabatan</option>
+                        @foreach($positions as $position)
+                            <option value="{{ $position->id }}">{{ $position->nama_jabatan }}</option>
+                        @endforeach
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td><label for="departemen_id">Departemen:</label></td>
+                <td>
+                    <select id="departemen_id" name="departemen_id" required>
+                        <option value="" disabled selected>Pilih Departemen</option>
+                        @foreach($departments as $department)
+                            <option value="{{ $department->id }}">{{ $department->nama_departmen }}</option>
+                        @endforeach
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td><label for="email">Email:</label></td>
@@ -50,6 +68,4 @@
             </tr>
         </table>
     </form>
-</body>
-
-</html>
+@endsection
