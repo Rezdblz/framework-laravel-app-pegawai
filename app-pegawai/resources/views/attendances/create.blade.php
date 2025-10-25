@@ -4,7 +4,7 @@
 <h1 class="mb-4">Form Attendance</h1>
 <form action="{{ route('attendances.store') }}" method="POST">
     @csrf
-    <table>
+    <table class>
         <tr>
             <td><label for="karyawan_id">Karyawan:</label></td>
             <td>

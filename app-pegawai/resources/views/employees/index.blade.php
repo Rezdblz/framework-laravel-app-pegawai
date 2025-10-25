@@ -36,11 +36,12 @@
                         <td class="px-4 py-2">{{ $employee->tanggal_lahir }}</td>
                         <td class="px-4 py-2">{{ $employee->alamat }}</td>
                         <td class="px-4 py-2">{{ $employee->tanggal_masuk }}</td>
-                        <td class="px-4 py-2">@if($employee->status === 'aktif')
-                            <span class="bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                                {{ $employee->status }}
-                            </span>
-                        @else
+                        <td class="px-4 py-2">
+                            @if($employee->status === 'aktif')
+                                <span class="bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
+                                    {{ $employee->status }}
+                                </span>
+                            @else
                                 <span class="bg-red-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
                                     {{ $employee->status }}
                                 </span>
@@ -48,9 +49,9 @@
                         </td>
                         <td class="px-4 py-2">
                             <a class="text-emerald-400 hover:text-emerald-600 hover:underline cursor-pointer bg-transparent border-none p-0 m-0"
-                                href="{{ route('employees.show', $employee->id) }}">Detail</a>
+                                href="{{ route('employees.show', $employee->id) }}">Detail</a> |
                             <a class="text-indigo-400 hover:text-indigo-600 hover:underline cursor-pointer bg-transparent border-none p-0 m-0"
-                                href="{{ route('employees.edit', $employee->id) }}">Edit</a>
+                                href="{{ route('employees.edit', $employee->id) }}">Edit</a> |
                             <form action="{{ route('employees.destroy', $employee->id) }}" method="POST"
                                 style="display:inline;">
                                 @csrf
