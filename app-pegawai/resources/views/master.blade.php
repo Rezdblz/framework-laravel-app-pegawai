@@ -13,7 +13,7 @@
     </script>
 </head>
 
-<body class="bg-gray-100">
+<body class="bg-slate-800">
     <!-- Sidebar Start -->
     <div class="flex min-h-screen">
         <div class="flex flex-col items-center w-40 h-screen overflow-hidden text-gray-400 bg-gray-900 rounded">
@@ -21,31 +21,36 @@
                 <i data-lucide="database" class="w-5 h-5"></i>
                 <span class="ml-2 text-sm font-bold">@yield('page-title', 'App Pegawai')</span>
             </a>
-            <div class="w-full px-2">
+            <div class="w-full px-2 ">
                 <div class="flex flex-col items-center w-full mt-3 border-t border-gray-700">
-                    <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
+                    <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 transition
+                    {{ Request::is('employees*') ? 'bg-gray-800 text-white' : '' }}"
                         href="{{ url('/employees') }}">
                         <i data-lucide="briefcase" class="w-5 h-5"></i>
                         <span class="ml-2 text-sm font-medium">Employee</span>
                     </a>
-                    <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
+                    <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 transition
+                    {{ Request::is('positions*') ? 'bg-gray-800 text-white' : '' }}"
                         href="{{ url('/positions') }}">
                         <i data-lucide="search" class="w-5 h-5"></i>
                         <span class="ml-2 text-sm font-medium">Position</span>
                     </a>
-                    <a class="flex items-center w-full h-12 px-3 mt-2 text-gray-200 bg-gray-700 rounded"
+                    <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 transition
+                    {{ Request::is('departments*') ? 'bg-gray-800 text-white' : '' }}"
                         href="{{ url('/departments') }}">
                         <i data-lucide="bar-chart-2" class="w-5 h-5"></i>
                         <span class="ml-2 text-sm font-medium">Department</span>
                     </a>
-                    <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
+                    <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 transition
+                    {{ Request::is('attendances*') ? 'bg-gray-800 text-white' : '' }}"
                         href="{{ url('/attendances') }}">
                         <i data-lucide="clipboard-list" class="w-5 h-5"></i>
                         <span class="ml-2 text-sm font-medium">Attendance</span>
                     </a>
-                    <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300"
+                    <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 transition
+                    {{ Request::is('salaries*') ? 'bg-gray-800 text-white' : '' }}"
                         href="{{ url('/salaries') }}">
-                        <i data-lucide="file-text" class="w-5 h-5"></i>
+                        <i data-lucide="banknote-arrow-down" class="w-5 h-5"></i>
                         <span class="ml-2 text-sm font-medium">Salary</span>
                     </a>
                 </div>
@@ -69,7 +74,7 @@
 
         <!-- content start  -->
         <div class="flex-1 flex flex-col">
-            <main class="flex-1 ms-4">
+            <main class="flex-1 ms-4 mr-4">
                 @yield('content')
             </main>
         </div>
