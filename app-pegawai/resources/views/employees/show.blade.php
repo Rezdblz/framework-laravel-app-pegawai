@@ -1,43 +1,43 @@
 @extends('master')
 @section('title', 'Detail Pegawai')
 @section('content')
-<h1>Detail Pegawai</h1>
-<table border="1" cellpadding="8" cellspacing="0">
+<h1 class="text-2xl text-white font-bold pt-4 pb-4">Detail Pegawai</h1>
+<table class="text-white text-left w-full max-w-md bg-gray-800 rounded shadow mb-8">
     <tr>
-        <th>Nama Lengkap</th>
-        <td>{{ $employee->nama_lengkap }}</td>
+        <th class="pr-8 py-2">Nama Lengkap</th>
+        <td class="pl-4 py-2">{{ $employee->nama_lengkap }}</td>
     </tr>
     <tr>
-        <th>Jabatan</th>
-        <td>{{ $employee->position->nama_jabatan }}</td>
+        <th class="pr-8 py-2">Jabatan</th>
+        <td class="pl-4 py-2">{{ $employee->position->nama_jabatan }}</td>
     </tr>
     <tr>
-        <th>Departemen</th>
-        <td>{{ $employee->department->nama_departmen }}</td>
+        <th class="pr-8 py-2">Departemen</th>
+        <td class="pl-4 py-2">{{ $employee->department->nama_departmen }}</td>
     </tr>
     <tr>
-        <th>Email</th>
-        <td>{{ $employee->email }}</td>
+        <th class="pr-8 py-2">Email</th>
+        <td class="pl-4 py-2">{{ $employee->email }}</td>
     </tr>
     <tr>
-        <th>Nomor Telepon</th>
-        <td>{{ $employee->nomor_telepon }}</td>
+        <th class="pr-8 py-2">Nomor Telepon</th>
+        <td class="pl-4 py-2">{{ $employee->nomor_telepon }}</td>
     </tr>
     <tr>
-        <th>Tanggal Lahir</th>
-        <td>{{ $employee->tanggal_lahir }}</td>
+        <th class="pr-8 py-2">Tanggal Lahir</th>
+        <td class="pl-4 py-2">{{ $employee->tanggal_lahir }}</td>
     </tr>
     <tr>
-        <th>Alamat</th>
-        <td>{{ $employee->alamat }}</td>
+        <th class="pr-8 py-2">Alamat</th>
+        <td class="pl-4 py-2">{{ $employee->alamat }}</td>
     </tr>
     <tr>
-        <th>Tanggal Masuk</th>
-        <td>{{ $employee->tanggal_masuk }}</td>
+        <th class="pr-8 py-2">Tanggal Masuk</th>
+        <td class="pl-4 py-2">{{ $employee->tanggal_masuk }}</td>
     </tr>
     <tr>
-        <th>Status</th>
-        <td>{{ $employee->status }}</td>
+        <th class="pr-8 py-2">Status</th>
+        <td class="pl-4 py-2">{{ $employee->status }}</td>
     </tr>
 </table>
 @endsection

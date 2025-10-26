@@ -14,6 +14,7 @@
                 <tr class=" text-left border-b border-gray-400">
                     <th class="px-4 py-2">ID</th>
                     <th class="px-4 py-2">Nama Departmen</th>
+                    <th class="px-4 py-2">Aksi</th>
                 </tr>
             </thead>
             <tbody class="text-gray-300">
