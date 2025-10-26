@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\Position;
+use App\Models\Department;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -12,7 +14,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $employees = Employee::latest()->paginate(5);
+        $employees = Employee::with('department', 'position')->latest()->paginate(5);
         return view('employees.index', compact('employees'));
     }
 
@@ -21,7 +23,9 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        return view('employees.create');
+        $departments = Department::orderBy('nama_departmen')->get();
+        $positions = Position::orderBy('nama_jabatan')->get();
+        return view('employees.create', compact('departments', 'positions'));
     }
 
     /**
@@ -29,16 +33,19 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $data = $request->validate([
             'nama_lengkap' => 'required|string|max:255',
+            'departemen_id' => 'required|integer|exists:departments,id',
+            'jabatan_id' => 'required|integer|exists:positions,id',
             'email' => 'required|email|max:255',
             'nomor_telepon' => 'required|string|max:20',
             'tanggal_lahir' => 'required|date',
             'alamat' => 'required|string|max:255',
             'tanggal_masuk' => 'required|date',
             'status' => 'required|string|max:50',
+
         ]);
-        Employee::create($request->all());
+        Employee::create($data);
         return redirect()->route('employees.index');
     }
 
@@ -47,7 +54,7 @@ class EmployeeController extends Controller
      */
     public function show(string $id)
     {
-        $employee = Employee::find($id);
+        $employee = Employee::with('department', 'position')->findOrFail($id);
         return view('employees.show', compact('employee'));
     }
 
@@ -56,8 +63,10 @@ class EmployeeController extends Controller
      */
     public function edit(string $id)
     {
-        $employee = Employee::find($id);
-        return view('employees.edit', compact('employee'));
+        $employee = Employee::findOrFail($id);
+        $positions = Position::orderBy('nama_jabatan')->get();
+        $departments = Department::orderBy('nama_departmen')->get();
+        return view('employees.edit', compact('employee', 'positions', 'departments'));
     }
 
     /**
@@ -65,26 +74,21 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $request->validate([
+        $data=$request->validate([
             'nama_lengkap' => 'required|string|max:255',
+            'departemen_id' => 'required|integer|exists:departments,id',
+            'jabatan_id' => 'required|integer|exists:positions,id',
             'email' => 'required|email|max:255',
             'nomor_telepon' => 'required|string|max:20',
             'tanggal_lahir' => 'required|date',
             'alamat' => 'required|string|max:255',
             'tanggal_masuk' => 'required|date',
             'status' => 'required|string|max:50',
+
         ]);
         $employee = Employee::findOrFail($id);
-        $employee->update($request->only([
-            'nama_lengkap',
-            'email',
-            'nomor_telepon',
-            'tanggal_lahir',
-            'alamat',
-            'tanggal_masuk',
-            'status',
-        ]));
-        return redirect()->route('employees.index');
+        $employee->update($data);
+        return redirect()->route('employees.index')->with('success', 'Pegawai berhasil diupdate.');
     }
 
     /**
@@ -92,7 +96,7 @@ class EmployeeController extends Controller
      */
     public function destroy(string $id)
     {
-        $employee = Employee::find($id);
+        $employee = Employee::findOrFail($id);
         $employee->delete();
         return redirect()->route('employees.index');
     }
