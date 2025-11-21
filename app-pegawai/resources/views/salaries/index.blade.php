@@ -46,5 +46,9 @@
                 @endforeach
             </tbody>
         </table>
+
+        <div class="mt-6">
+            {{ $salaries->links() }}
+        </div>
     </div>
 @endsection

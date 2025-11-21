@@ -23,7 +23,15 @@
             <tbody class="text-gray-300">
                 @foreach($employees as $employee)
                     <tr class="even:bg-gray-700 odd:bg-gray-800 border-b border-gray-600 ">
-                        <td class="px-4 py-2">{{ $employee->nama_lengkap }}</td>
+                        <td class="px-4 py-2">
+                            <div class="font-medium text-white">
+                                {{ $employee->nama_lengkap ?? '-' }}
+                            </div>
+                            <div class="text-xs text-gray-400">ID: {{ $employee->karyawan_id }}</div>
+                        </td>
+                        <td class="px-4 py-2">
+
+                        </td>
                         <td class="px-4 py-2">{{ $employee->position->nama_jabatan}}</td>
                         <td class="px-4 py-2">{{ $employee->department->nama_departmen ?? '-' }}</td>
                         <td class="px-4 py-2">
@@ -55,5 +63,9 @@
                 @endforeach
             </tbody>
         </table>
+
+        <div class="mt-6">
+            {{ $employees->links() }}
+        </div>
     </div>
 @endsection

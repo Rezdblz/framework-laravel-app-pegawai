@@ -40,5 +40,9 @@
                 @endforeach
             </tbody>
         </table>
+
+        <div class="mt-6">
+            {{ $departments->links() }}
+        </div>
     </div>
 @endsection

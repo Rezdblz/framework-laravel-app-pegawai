@@ -67,5 +67,9 @@
                 @endforeach
             </tbody>
         </table>
+
+        <div class="mt-6">
+            {{ $attendances->links() }}
+        </div>
     </div>
 @endsection
