@@ -16,11 +16,6 @@
                     <th class="px-4 py-2">Nama Lengkap</th>
                     <th class="px-4 py-2">jabatan</th>
                     <th class="px-4 py-2">departemen</th>
-                    <th class="px-4 py-2">Email</th>
-                    <th class="px-4 py-2">Nomor Telepon</th>
-                    <th class="px-4 py-2">Tanggal Lahir</th>
-                    <th class="px-4 py-2">Alamat</th>
-                    <th class="px-4 py-2">Tanggal Masuk</th>
                     <th class="px-4 py-2">Status</th>
                     <th class="px-4 py-2">Aksi</th>
                 </tr>
@@ -31,11 +26,6 @@
                         <td class="px-4 py-2">{{ $employee->nama_lengkap }}</td>
                         <td class="px-4 py-2">{{ $employee->position->nama_jabatan}}</td>
                         <td class="px-4 py-2">{{ $employee->department->nama_departmen ?? '-' }}</td>
-                        <td class="px-4 py-2">{{ $employee->email }}</td>
-                        <td class="px-4 py-2">{{ $employee->nomor_telepon }}</td>
-                        <td class="px-4 py-2">{{ $employee->tanggal_lahir }}</td>
-                        <td class="px-4 py-2">{{ $employee->alamat }}</td>
-                        <td class="px-4 py-2">{{ $employee->tanggal_masuk }}</td>
                         <td class="px-4 py-2">
                             @if($employee->status === 'aktif')
                                 <span class="bg-emerald-600 text-white px-3 py-1 rounded-full text-xs font-semibold">

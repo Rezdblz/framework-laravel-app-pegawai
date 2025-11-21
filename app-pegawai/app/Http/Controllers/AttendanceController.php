@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Attendance;
+use App\Models\Employee;
+use App\Models\Department;
 use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
@@ -12,8 +14,9 @@ class AttendanceController extends Controller
      */
     public function index()
     {
-        $attendances = Attendance::latest()->paginate(5);
-        return view('attendances.index', compact('attendances'));
+        $attendances = Attendance::with('employee')->latest()->paginate(5);
+        $departments = Department::orderBy('nama_departmen')->get();
+        return view('attendances.index', compact('attendances', 'departments'));
     }
 
     /**
@@ -21,7 +24,10 @@ class AttendanceController extends Controller
      */
     public function create()
     {
-        return view('attendances.create');
+        $departments = Department::orderBy('nama_departmen')->get();
+        $employees = Employee::orderBy('nama_lengkap')->get();
+        
+        return view('attendances.create', compact('departments', 'employees'));
     }
 
     /**
@@ -34,7 +40,7 @@ class AttendanceController extends Controller
             'tanggal' => 'required|date',
             'waktu_masuk' => 'nullable|date_format:H:i',
             'waktu_keluar' => 'nullable|date_format:H:i|after_or_equal:waktu_masuk',
-            'status_absensi' => 'required|string|in:hadir,izin,sakit,cuti,alfa',
+            'status_absensi' => 'required|string|in:hadir,izin,sakit',
         ]);
 
         Attendance::create($data);
@@ -55,7 +61,9 @@ class AttendanceController extends Controller
      */
     public function edit(Attendance $attendance)
     {
-        return view('attendances.edit', compact('attendance'));
+        $employees = Employee::with('department')->orderBy('nama_lengkap')->get();
+        $departments = Department::orderBy('nama_departmen')->get();
+        return view('attendances.edit', compact('attendance', 'employees', 'departments'));
     }
 
     /**
@@ -68,7 +76,7 @@ class AttendanceController extends Controller
             'tanggal' => 'required|date',
             'waktu_masuk' => 'nullable|date_format:H:i',
             'waktu_keluar' => 'nullable|date_format:H:i|after_or_equal:waktu_masuk',
-            'status_absensi' => 'required|string|in:hadir,izin,sakit,cuti,alfa',
+            'status_absensi' => 'required|string|in:hadir,izin,sakit',
         ]);
         $attendance->update($data);
         return redirect()->route('attendances.index')->with('success', 'Absensi berhasil diupdate.');

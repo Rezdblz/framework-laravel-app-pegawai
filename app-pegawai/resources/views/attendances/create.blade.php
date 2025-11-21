@@ -33,8 +33,6 @@
                     <option value="hadir">Hadir</option>
                     <option value="izin">Izin</option>
                     <option value="sakit">Sakit</option>
-                    <option value="cuti">Cuti</option>
-                    <option value="alfa">Alfa</option>
                 </select>
             </div>
         </div>

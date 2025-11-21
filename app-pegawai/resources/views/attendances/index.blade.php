@@ -13,8 +13,7 @@
         <table class="table-auto w-full border-gray-600 rounded shadow">
             <thead class="text-white">
                 <tr class=" text-left border-b border-gray-400">
-                    <th class="px-4 py-2">ID</th>
-                    <th class="px-4 py-2">ID Karyawan</th>
+                    <th class="px-4 py-2">Nama Karyawan</th>
                     <th class="px-4 py-2">Tanggal</th>
                     <th class="px-4 py-2">Waktu masuk</th>
                     <th class="px-4 py-2">Waktu keluar</th>
@@ -25,8 +24,12 @@
             <tbody class="text-gray-300">
                 @foreach($attendances as $attendance)
                     <tr class="even:bg-gray-700 odd:bg-gray-800 border-b border-gray-600 ">
-                        <td class="px-4 py-2">{{ $attendance->id }}</td>
-                        <td class="px-4 py-2">{{ $attendance->karyawan_id }}</td>
+                        <td class="px-4 py-2">
+                            <div class="font-medium text-white">
+                                {{ optional($attendance->employee)->nama_lengkap ?? '-' }}
+                            </div>
+                            <div class="text-xs text-gray-400">ID: {{ $attendance->karyawan_id }}</div>
+                        </td>
                         <td class="px-4 py-2">{{ $attendance->tanggal }}</td>
                         <td class="px-4 py-2">{{ $attendance->waktu_masuk }}</td>
                         <td class="px-4 py-2">{{ $attendance->waktu_keluar }}</td>
@@ -43,14 +46,7 @@
                                 <span class="bg-blue-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
                                     {{ $attendance->status_absensi }}
                                 </span>
-                            @elseif($attendance->status_absensi === 'cuti')
-                                <span class="bg-purple-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                                    {{ $attendance->status_absensi }}
-                                </span>
-                            @else
-                                <span class="bg-red-600 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                                    {{ $attendance->status_absensi }}
-                                </span>
+                            
                             @endif
                         </td>
                         <td class="px-4 py-2">

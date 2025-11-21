@@ -7,10 +7,12 @@
         @method('PUT')
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-                <label for="karyawan_id" class="block font-medium text-gray-400 mb-1">Karyawan ID</label>
-                <input type="number" id="karyawan_id" name="karyawan_id"
-                    value="{{ old('karyawan_id', $attendance->karyawan_id) }}" required
-                    class="w-full p-2 border border-gray-700 rounded-md focus:ring-2 focus:ring-indigo-500 outline-none bg-gray-800 text-white">
+                <label class="block font-medium text-gray-400 mb-1">Karyawan</label>
+                <input type="hidden" id="karyawan_id" name="karyawan_id" value="{{ old('karyawan_id', $attendance->karyawan_id) }}">
+                <div class="w-full p-2 border border-gray-700 rounded-md bg-gray-800 text-white">
+                    <div class="font-medium text-white">{{ optional($attendance->employee)->nama_lengkap ?? '-' }}</div>
+                    <div class="text-xs text-gray-400">ID: {{ $attendance->karyawan_id }}</div>
+                </div>
             </div>
             <div>
                 <label for="tanggal" class="block font-medium text-gray-400 mb-1">Tanggal</label>
@@ -34,7 +36,7 @@
                 <label for="status_absensi" class="block font-medium text-gray-400 mb-1">Status Absensi</label>
                 <select id="status_absensi" name="status_absensi" required
                     class="w-full p-2 border border-gray-700 rounded-md bg-gray-800 text-white">
-                    @foreach(['hadir','izin','sakit','cuti','alfa'] as $status)
+                    @foreach(['hadir','izin','sakit'] as $status)
                         <option value="{{ $status }}"
                             {{ old('status_absensi', $attendance->status_absensi) == $status ? 'selected' : '' }}>
                             {{ ucfirst($status) }}
@@ -49,4 +51,35 @@
             </button>
         </div>
     </form>
+
+    <script>
+        (function () {
+            const statusEl = document.getElementById('status_absensi');
+            const masukEl = document.getElementById('waktu_masuk');
+            const keluarEl = document.getElementById('waktu_keluar');
+
+            function toggleTimeInputs() {
+                const s = statusEl.value;
+                const disable = (s === 'sakit' || s === 'izin');
+
+                masukEl.disabled = disable;
+                keluarEl.disabled = disable;
+
+                if (disable) {
+                    masukEl.value = '';
+                    keluarEl.value = '';
+                }
+
+                const parentMasuk = masukEl.parentElement;
+                const parentKeluar = keluarEl.parentElement;
+                parentMasuk.style.opacity = disable ? '0.6' : '1';
+                parentKeluar.style.opacity = disable ? '0.6' : '1';
+                parentMasuk.style.pointerEvents = disable ? 'none' : 'auto';
+                parentKeluar.style.pointerEvents = disable ? 'none' : 'auto';
+            }
+
+            statusEl.addEventListener('change', toggleTimeInputs);
+            document.addEventListener('DOMContentLoaded', toggleTimeInputs);
+        })();
+    </script>
 @endsection

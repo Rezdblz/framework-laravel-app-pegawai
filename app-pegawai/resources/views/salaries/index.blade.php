@@ -12,12 +12,8 @@
         <table class="table-auto w-full border-gray-600 rounded shadow">
             <thead class="text-white">
                 <tr class="text-left border-b border-gray-400">
-                    <th class="px-4 py-2">ID</th>
-                    <th class="px-4 py-2">ID Karyawan</th>
+                    <th class="px-4 py-2">Nama Karyawan</th>
                     <th class="px-4 py-2">Bulan</th>
-                    <th class="px-4 py-2">Gaji Pokok</th>
-                    <th class="px-4 py-2">Tunjangan</th>
-                    <th class="px-4 py-2">Potongan</th>
                     <th class="px-4 py-2">Total Gaji</th>
                     <th class="px-4 py-2">Aksi</th>
                 </tr>
@@ -25,12 +21,13 @@
             <tbody class="text-gray-300">
                 @foreach($salaries as $salary)
                     <tr class="even:bg-gray-700 odd:bg-gray-800 border-b border-gray-600">
-                        <td class="px-4 py-2">{{ $salary->id }}</td>
-                        <td class="px-4 py-2">{{ $salary->karyawan_id }}</td>
+                        <td class="px-4 py-2">
+                            <div class="font-medium text-white">
+                                {{ optional($salary->employee)->nama_lengkap ?? '-' }}
+                            </div>
+                            <div class="text-xs text-gray-400">ID: {{ $salary->karyawan_id }}</div>
+                        </td>
                         <td class="px-4 py-2">{{ $salary->bulan }}</td>
-                        <td class="px-4 py-2">{{ $salary->gaji_pokok }}</td>
-                        <td class="px-4 py-2">{{ $salary->tunjangan }}</td>
-                        <td class="px-4 py-2">{{ $salary->potongan }}</td>
                         <td class="px-4 py-2">{{ $salary->total_gaji }}</td>
                         <td class="px-4 py-2">
                             <a class="text-emerald-400 hover:text-emerald-600 hover:underline cursor-pointer bg-transparent border-none p-0 m-0"

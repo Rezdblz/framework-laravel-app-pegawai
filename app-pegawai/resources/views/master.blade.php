@@ -25,6 +25,11 @@
             <div class="w-full px-2 ">
                 <div class="flex flex-col items-center w-full mt-3 border-t border-gray-700">
                     <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 transition
+                    {{ Request::is('dashboard*') ? 'bg-gray-800 text-white' : '' }}" href="{{ url('/dashboard') }}">
+                        <i data-lucide="briefcase" class="w-5 h-5"></i>
+                        <span class="ml-2 text-sm font-medium">Dashboard</span>
+                    </a>
+                    <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 transition
                     {{ Request::is('employees*') ? 'bg-gray-800 text-white' : '' }}" href="{{ url('/employees') }}">
                         <i data-lucide="briefcase" class="w-5 h-5"></i>
                         <span class="ml-2 text-sm font-medium">Employee</span>

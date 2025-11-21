@@ -24,8 +24,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('employees',EmployeeController::class);
-Route::resource('salaries',SalaryController::class);
-Route::resource('attendances',AttendanceController::class);
-Route::resource('departments',DepartmentController::class);
-Route::resource('positions',PositionController::class);
+Route::resource('employees', EmployeeController::class);
+Route::resource('salaries', SalaryController::class);
+Route::resource('attendances', AttendanceController::class);
+Route::resource('departments', DepartmentController::class);
+Route::resource('positions', PositionController::class);

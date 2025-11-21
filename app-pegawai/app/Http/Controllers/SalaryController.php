@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Employee;
+use App\Models\Position;
 use App\Models\Salary;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,8 @@ class SalaryController extends Controller
      */
     public function index()
     {
-        $salaries = Salary::latest()->paginate(5);
+        
+        $salaries = Salary::with('employee')->latest()->paginate(5);
         return view('salaries.index', compact('salaries'));
     }
 
@@ -60,8 +62,10 @@ class SalaryController extends Controller
      */
     public function edit(Salary $salary)
     {
-        $employees = Employee::orderBy('nama_lengkap')->get();
-        return view('salaries.edit', compact('salary', 'employees'));
+        $salary->load('employee.position');
+        $employees = Employee::with('position')->orderBy('nama_lengkap')->get();
+        $positions = Position::orderBy('nama_jabatan')->get();
+        return view('salaries.edit', compact('salary', 'employees', 'positions'));
     }
 
     /**
