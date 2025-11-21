@@ -16,8 +16,8 @@
 
 <body class="bg-slate-800">
     <!-- Sidebar Start -->
-    <div class="flex min-h-screen">
-        <div class="flex flex-col items-center w-40 h-screen overflow-hidden text-gray-400 bg-gray-900 rounded">
+    <div class="flex">
+        <div class="flex flex-col items-center w-40 h-screen overflow-y-auto text-gray-400 bg-gray-900 rounded sticky top-0">
             <a class="flex items-center w-full px-3 mt-3" href="{{ url('/') }}">
                 <i data-lucide="database" class="w-10 h-10"></i>
                 <span class="ml-2 text-base font-bold">@yield('page-title', 'App Pegawai')</span>
@@ -26,7 +26,7 @@
                 <div class="flex flex-col items-center w-full mt-3 border-t border-gray-700">
                     <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 transition
                     {{ Request::is('dashboard*') ? 'bg-gray-800 text-white' : '' }}" href="{{ url('/dashboard') }}">
-                        <i data-lucide="briefcase" class="w-5 h-5"></i>
+                        <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
                         <span class="ml-2 text-sm font-medium">Dashboard</span>
                     </a>
                     <a class="flex items-center w-full h-12 px-3 mt-2 rounded hover:bg-gray-700 hover:text-gray-300 transition
@@ -58,17 +58,6 @@
                     </a>
                 </div>
             </div>
-            <!--
-            <a class="flex items-center justify-center w-full h-16 mt-auto bg-gray-800 hover:bg-gray-700 hover:text-gray-300"
-                href="#">
-                <svg class="w-6 h-6 stroke-current" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span class="ml-2 text-sm font-medium">Account</span>
-            </a>
-            -->
             <div class="mt-auto mb-4 text-xs text-gray-500">
                 <p>&copy; {{ date('Y') }} App Pegawai</p>
             </div>
@@ -76,8 +65,8 @@
         <!-- Sidebar End  -->
 
         <!-- content start  -->
-        <div class="flex-1 flex flex-col">
-            <main class="flex-1 ms-4 mr-4">
+        <div class="flex-1 overflow-y-auto">
+            <main class="ms-4 mr-4">
                 @yield('content')
             </main>
         </div>

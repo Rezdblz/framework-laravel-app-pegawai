@@ -24,7 +24,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::resource('dashboards', DashboardController::class);
+
+
+Route::resource('dashboard', DashboardController::class);
 Route::resource('employees', EmployeeController::class);
 Route::resource('salaries', SalaryController::class);
 Route::resource('attendances', AttendanceController::class);
