@@ -21,18 +21,6 @@
                     class="w-full p-2 border border-gray-700 rounded-md bg-gray-800 text-white">
             </div>
             <div>
-                <label for="waktu_masuk" class="block font-medium text-gray-400 mb-1">Waktu Masuk</label>
-                <input type="time" id="waktu_masuk" name="waktu_masuk"
-                    value="{{ old('waktu_masuk', $attendance->waktu_masuk) }}"
-                    class="w-full p-2 border border-gray-700 rounded-md bg-gray-800 text-white">
-            </div>
-            <div>
-                <label for="waktu_keluar" class="block font-medium text-gray-400 mb-1">Waktu Keluar</label>
-                <input type="time" id="waktu_keluar" name="waktu_keluar"
-                    value="{{ old('waktu_keluar', $attendance->waktu_keluar) }}"
-                    class="w-full p-2 border border-gray-700 rounded-md bg-gray-800 text-white">
-            </div>
-            <div>
                 <label for="status_absensi" class="block font-medium text-gray-400 mb-1">Status Absensi</label>
                 <select id="status_absensi" name="status_absensi" required
                     class="w-full p-2 border border-gray-700 rounded-md bg-gray-800 text-white">
@@ -44,6 +32,19 @@
                     @endforeach
                 </select>
             </div>
+            <div>
+                <label for="waktu_masuk" class="block font-medium text-gray-400 mb-1">Waktu Masuk</label>
+                <input type="time" id="waktu_masuk" name="waktu_masuk"
+                    value="{{ old('waktu_masuk', $attendance->waktu_masuk) }}"
+                    class="w-full p-2 border border-gray-700 rounded-md bg-gray-800 text-white">
+            </div>
+            <div>
+                <label for="waktu_keluar" class="block font-medium text-gray-400 mb-1">Waktu Keluar</label>
+                <input type="time" id="waktu_keluar" name="waktu_keluar"
+                    value="{{ old('waktu_keluar', $attendance->waktu_keluar) }}"
+                    class="w-full p-2 border border-gray-700 rounded-md bg-gray-800 text-white">
+            </div>
+            
         </div>
         <div class="flex justify-start mt-4">
             <button type="submit" class="px-4 py-2 rounded bg-indigo-700 text-white font-semibold hover:bg-indigo-800 transition">
