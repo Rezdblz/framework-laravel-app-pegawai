@@ -29,17 +29,21 @@
         </div>
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
         <!-- Actions Distribution Pie Chart -->
         <div class="bg-gray-800 rounded-lg border border-gray-700 p-6">
             <h2 class="text-xl text-white font-bold mb-4">Actions Distribution</h2>
-            <canvas id="actionsChart"></canvas>
+            <div class="h-64 w-full">
+                <canvas id="actionsChart"></canvas>
+            </div>
         </div>
 
         <!-- Entity Type Bar Chart -->
-        <div class="bg-gray-800 rounded-lg border border-gray-700 p-6">
+        <div class="col-span-2 bg-gray-800 rounded-lg border border-gray-700 p-6">
             <h2 class="text-xl text-white font-bold mb-4">Changes by Entity</h2>
-            <canvas id="entityChart"></canvas>
+            <div class="h-96 w-full">
+                <canvas id="entityChart"></canvas>
+            </div>
         </div>
     </div>
 

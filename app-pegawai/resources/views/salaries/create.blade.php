@@ -6,9 +6,16 @@
         @csrf
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-                <label for="karyawan_id" class="block font-medium text-gray-400 mb-1">ID Karyawan</label>
-                <input type="number" id="karyawan_id" name="karyawan_id" required
+                <label for="karyawan_id" class="block font-medium text-gray-400 mb-1">Karyawan</label>
+                <select id="karyawan_id" name="karyawan_id" required
                     class="w-full p-2 border border-gray-700 rounded-md focus:ring-2 focus:ring-indigo-500 outline-none bg-gray-800 text-white">
+                    <option value="" disabled selected>Pilih Karyawan</option>
+                    @foreach($employees as $employee)
+                        <option value="{{ $employee->id }}" data-gaji="{{ $employee->position?->gaji_pokok ?? 0 }}">
+                            {{ $employee->nama_lengkap }} - {{ $employee->position?->nama_jabatan ?? 'N/A' }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
             <div>
                 <label for="bulan" class="block font-medium text-gray-400 mb-1">Bulan</label>
@@ -31,8 +38,8 @@
             </div>
             <div>
                 <label for="gaji_pokok" class="block font-medium text-gray-400 mb-1">Gaji Pokok</label>
-                <input type="number" id="gaji_pokok" name="gaji_pokok" required
-                    class="w-full p-2 border border-gray-700 rounded-md focus:ring-2 focus:ring-indigo-500 outline-none bg-gray-800 text-white">
+                <input type="number" id="gaji_pokok" name="gaji_pokok" readonly
+                    class="w-full p-2 border border-gray-700 rounded-md bg-gray-800 text-white opacity-75">
             </div>
             <div>
                 <label for="tunjangan" class="block font-medium text-gray-400 mb-1">Tunjangan</label>
@@ -51,4 +58,18 @@
             </button>
         </div>
     </form>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const select = document.getElementById('karyawan_id');
+        const gajiInput = document.getElementById('gaji_pokok');
+
+        if (select && gajiInput) {
+            select.addEventListener('change', function() {
+                const gaji = this.options[this.selectedIndex].getAttribute('data-gaji');
+                gajiInput.value = gaji || '';
+            });
+        }
+    });
+    </script>
 @endsection

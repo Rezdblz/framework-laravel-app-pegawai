@@ -29,8 +29,7 @@
             <div>
                 <label for="gaji_pokok" class="block font-medium text-gray-400 mb-1">Gaji Pokok</label>
                 <input type="number" id="gaji_pokok" name="gaji_pokok" 
-                    value="{{ old('gaji_pokok', $salary->employee?->position?->gaji_pokok ?? $salary->gaji_pokok) }}"
-                    required readonly
+                    value="{{ old('gaji_pokok', $salary->gaji_pokok ?? '') }}" readonly
                     class="w-full p-2 border border-gray-700 rounded-md bg-gray-800 text-white opacity-75">
             </div>
             <div>
@@ -51,19 +50,18 @@
             </button>
         </div>
     </form>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const select = document.getElementById('karyawan_id');
+        const gajiInput = document.getElementById('gaji_pokok');
+
+        if (select && gajiInput) {
+            select.addEventListener('change', function() {
+                const gaji = this.options[this.selectedIndex].getAttribute('data-gaji');
+                gajiInput.value = gaji || '';
+            });
+        }
+    });
+    </script>
 @endsection
-
-<script>
-    (function() {
-        const gajiPokokEl = document.getElementById('gaji_pokok');
-        const employeeData = {!! json_encode($employees->map(fn($e) => [
-            'id' => $e->id,
-            'gaji_pokok' => $e->position?->gaji_pokok ?? 0
-        ])) !!};
-
-        document.getElementById('karyawan_id').addEventListener('change', function() {
-            const emp = employeeData.find(e => e.id == this.value);
-            gajiPokokEl.value = emp ? emp.gaji_pokok : '';
-        });
-    })();
-</script>

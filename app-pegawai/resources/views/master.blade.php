@@ -57,7 +57,7 @@
         </div>
 
         <!-- Mobile Menu Button -->
-        <button id="menuBtn" class="md:hidden fixed top-4 left-4 z-50 p-2 bg-gray-900 rounded text-gray-400 hover:text-white">
+        <button id="menuBtn" class="md:hidden fixed top-4 right-4 z-50 p-2 bg-gray-900 rounded text-gray-400 hover:text-white">
             <i data-lucide="menu" class="w-6 h-6"></i>
         </button>
 

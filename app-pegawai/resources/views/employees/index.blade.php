@@ -27,10 +27,7 @@
                             <div class="font-medium text-white">
                                 {{ $employee->nama_lengkap ?? '-' }}
                             </div>
-                            <div class="text-xs text-gray-400">ID: {{ $employee->karyawan_id }}</div>
-                        </td>
-                        <td class="px-4 py-2">
-
+                            <div class="text-xs text-gray-400">ID: {{ $employee->id }}</div>
                         </td>
                         <td class="px-4 py-2">{{ $employee->position->nama_jabatan}}</td>
                         <td class="px-4 py-2">{{ $employee->department->nama_departmen ?? '-' }}</td>

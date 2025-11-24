@@ -24,7 +24,7 @@ class SalaryController extends Controller
      */
     public function create()
     {
-        $employees = Employee::orderBy('nama_lengkap')->get();
+        $employees = Employee::with('position')->orderBy('nama_lengkap')->get();
         return view('salaries.create', compact('employees'));
     }
 
@@ -34,19 +34,20 @@ class SalaryController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'karyawan_id' => 'required|integer|exists:employees,id',
+            'karyawan_id' => 'required|exists:employees,id',
             'bulan' => 'required|string',
-            'gaji_pokok' => 'required|integer|min:0',
-            'tunjangan' => 'nullable|integer|min:0',
-            'potongan' => 'nullable|integer|min:0',
+            'gaji_pokok' => 'required|numeric|min:0',
+            'tunjangan' => 'nullable|numeric|min:0',
+            'potongan' => 'nullable|numeric|min:0',
         ]);
-        
+
         $data['tunjangan'] = $data['tunjangan'] ?? 0;
         $data['potongan'] = $data['potongan'] ?? 0;
+        
         $data['total_gaji'] = $data['gaji_pokok'] + $data['tunjangan'] - $data['potongan'];
 
         Salary::create($data);
-        return redirect()->route('salaries.index')->with('success', 'Gaji berhasil disimpan.');
+        return redirect()->route('salaries.index')->with('success', 'Gaji berhasil ditambahkan.');
     }
 
     /**
@@ -76,9 +77,9 @@ class SalaryController extends Controller
         $data = $request->validate([
             'karyawan_id' => 'required|exists:employees,id',
             'bulan' => 'required|string',
-            'gaji_pokok' => 'required|integer|min:0',
-            'tunjangan' => 'nullable|integer|min:0',
-            'potongan' => 'nullable|integer|min:0',
+            'gaji_pokok' => 'required|numeric|min:0',
+            'tunjangan' => 'nullable|numeric|min:0',
+            'potongan' => 'nullable|numeric|min:0',
         ]);
 
         $data['tunjangan'] = $data['tunjangan'] ?? 0;
